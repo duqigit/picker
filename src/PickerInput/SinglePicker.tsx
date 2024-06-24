@@ -551,8 +551,8 @@ function Picker<DateType extends object = any>(
   };
 
   const onSelectorBlur: SelectorProps['onBlur'] = (event) => {
+    triggerOpen(false);
 
-    onSharedBlur(event);
   };
 
   const onSelectorKeyDown: SelectorProps['onKeyDown'] = (event, preventDefault) => {
