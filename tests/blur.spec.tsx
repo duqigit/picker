@@ -64,4 +64,25 @@ describe('Picker.ChangeOnBlur', () => {
     expect(startInputEle).toHaveValue('no valid 1');
     expect(endInputEle).toHaveValue('no valid 2');
   });
+
+  it('PickerBlur', async () => {
+    const blur = jest.fn();
+    const { container } = render(<DayPicker onBlur={blur} />);
+
+    // Open
+    openPicker(container);
+
+    const inputEle = container.querySelector('input');
+    fireEvent.change(inputEle, {
+      target: {
+        value: '2000-03-03',
+      },
+    });
+
+    // Close
+    closePicker(container);
+    await waitFakeTimer();
+    expect(inputEle).toHaveValue('2000-03-03');
+    expect(blur).toHaveBeenCalledTimes(1);
+  });
 });
